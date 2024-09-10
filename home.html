@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Traders@BPHC</title>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <a href="home.html"><img src="logo.png" alt=""></a>
+        </div>
+        <div class="header-right">
+            <a href="contact.html">Contact Us</a>
+            <a href="learn.html">Learn More</a>
+            <a href="home.html" class="active">Home</a>
+        </div>
+    </div>
+    <div class="body">
+        <div class="body-left">
+            <div class="heading">
+                Traders@BPHC<span class="input-cursor"></span>
+            </div>
+            <div class="subtext">
+                We, Traders@BPHC, always strive towards enchancing the knowledge of financial markets among the General Body. 
+                We are comitted to contributing to any initiative taken in favour of the same.
+            </div>
+            <a href="contact.html">Contact us</a><a href="learn.html">Learn More</a>
+        </div>
+        <img src="stocks.webp" alt="">
+    </div>
+</body>
+
+<script>
+async function typeSentence(sentence, eleRef, delay = 100) {
+    const letters = sentence.split("");
+    let i = 0;
+    while(i < letters.length) {
+        await waitForMs(delay);
+        $(eleRef).append(letters[i]);
+        i++
+    }
+    return;
+}
+
+
+function waitForMs(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+async function deleteSentence(eleRef) {
+    const sentence = $(eleRef).html();
+    const letters = sentence.split("");
+    let i = 0;
+    while(letters.length > 0) {
+        await waitForMs(100);
+        letters.pop();
+        $(eleRef).html(letters.join(""));
+    }
+}
+
+const carouselText = [
+  {text: "Apple", color: "red"},
+  {text: "Orange", color: "orange"},
+  {text: "Lemon", color: "yellow"}
+]
+
+async function carousel(carouselList, eleRef) {
+    var i = 0;
+    while(true) {
+      updateFontColor(eleRef, carouselList[i].color)
+      await typeSentence(carouselList[i].text, eleRef);
+      await waitForMs(1500);
+      await deleteSentence(eleRef);
+      await waitForMs(500);
+      i++
+      if(i >= carouselList.length) {i = 0;}
+    }
+}
+
+function updateFontColor(eleRef, color) {
+  $(eleRef).css('color', color);
+}
+</script>
+
+</html>
